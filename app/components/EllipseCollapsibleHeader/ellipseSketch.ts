@@ -1,6 +1,8 @@
 import p5 from "p5";
 import styles from "../../styles/header.module.css";
 
+// TODO: Refactor common logic between the two sketches
+
 export const createEllipsesSketch = (
   headerRef: React.RefObject<HTMLElement | null>,
   toCollapseRef: React.RefObject<boolean>
@@ -70,14 +72,13 @@ export const createEllipsesSketch = (
 
 export const createAsciiEllipsesSketch = (
   headerRef: React.RefObject<HTMLElement | null>,
-  toCollapseRef: React.MutableRefObject<boolean>
+  toCollapseRef: React.RefObject<boolean>
 ) => {
   const padding = 10;
   const maxCollapse = 0.3;
   const randomText = ["%", "@", "!", "*", "&", "^", "#"];
   let currentCollapse = 0;
 
-  // Helper to draw text along an ellipse path
   const drawAsciiEllipse = (
     p: p5,
     cx: number,
@@ -85,7 +86,6 @@ export const createAsciiEllipsesSketch = (
     w: number,
     h: number
   ) => {
-    // Density: Adjust 'gap' to change how many characters appear
     const gap = 12;
     const circumference =
       p.PI *
@@ -115,7 +115,7 @@ export const createAsciiEllipsesSketch = (
       p.textFont("monospace");
       p.textSize(8);
       p.textAlign(p.CENTER, p.CENTER);
-      p.frameRate(24); // Lower framerate for a more "retro" look
+      p.frameRate(24);
     };
 
     p.draw = () => {
@@ -132,7 +132,6 @@ export const createAsciiEllipsesSketch = (
       const cy = p.height / 2;
       const baseH = p.height - padding;
 
-      // Styling for the ASCII text
       p.noStroke();
       p.fill(0, 0, 0, toCollapseRef.current ? 100 : 255);
 

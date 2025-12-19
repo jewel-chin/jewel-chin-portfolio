@@ -21,11 +21,9 @@ const EllipseCollapsibleHeader: React.FC = () => {
   const headerRef = useRef<HTMLElement | null>(null);
   const { x, y } = useMousePosition();
   const lastScrollY = useRef(0);
-
-  // Refs for p5 (no re-render)
   const toCollapseRef = useRef(false);
 
-  // State for React UI (triggers re-render for text color)
+  // collapsed header will dim the text
   const [isDimmed, setIsDimmed] = useState(false);
 
   useEffect(() => {
@@ -48,7 +46,7 @@ const EllipseCollapsibleHeader: React.FC = () => {
 
       if (scrollingDown !== toCollapseRef.current) {
         toCollapseRef.current = scrollingDown;
-        setIsDimmed(scrollingDown); // Trigger React re-render for text
+        setIsDimmed(scrollingDown);
       }
       lastScrollY.current = currentScrollY;
     };
@@ -63,7 +61,7 @@ const EllipseCollapsibleHeader: React.FC = () => {
     };
   }, []);
 
-  // Handle Cursor Mask
+  // handle the cursor mask
   useEffect(() => {
     const mask = document.querySelector(`.${styles.mask}`) as HTMLElement;
     if (mask) {
