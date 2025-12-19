@@ -1,0 +1,11 @@
+.mask {
+  background-color: color(--color-background);
+  position: absolute;
+  mask-image: url('../../public/mask.svg');
+  mask-repeat: no-repeat;
+  mask-size: 80px;
+}
+
+.solidEllipse {
+  position: absolute;
+}
